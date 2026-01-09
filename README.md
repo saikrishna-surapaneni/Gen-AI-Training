@@ -122,6 +122,7 @@ Connecting to what you already know
     Tokens → units processed in parallel
 
  **09/01/2026**
+ 
 **Embeddings**
   An embedding is a way to convert something (text, image, audio, etc.) into numbers so that similar things have similar numbers.
 Why embeddings exist
