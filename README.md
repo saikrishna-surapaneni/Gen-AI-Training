@@ -100,9 +100,9 @@ Water boiling
  --That’s why DL training is fast (relatively).
  
 **Parallelism in Transformers**
-  Before (RNNs / LSTMs)
-    Read text one word at a time
-    Next word waits for previous word
+Before (RNNs / LSTMs)
+  Read text one word at a time
+  Next word waits for previous word
   Slow
   Hard to scale
   Transformers
@@ -111,8 +111,8 @@ Attention is computed in parallel
  Fast
  Scales to huge models
 This is why:
-ChatGPT exists
-Large context windows are possible
+  ChatGPT exists
+  Large context windows are possible
 
 In simple : Parallelism is the ability to process multiple operations or pieces of data simultaneously, rather than sequentially.
 Connecting to what you already know
@@ -121,22 +121,107 @@ Connecting to what you already know
     Attention → decides what matters
     Tokens → units processed in parallel
 
+ **09/01/2026**
+**Embeddings**
+  An embedding is a way to convert something (text, image, audio, etc.) into numbers so that similar things have similar numbers.
+Why embeddings exist
+  Computers don’t understand meaning.
+  They only understand numbers.
+  Embeddings are the bridge between:
+         human Meaning --- machine numbers
 
+**Tasks**
 
+1.Determine the requirements for building a video or image chatbot with streaming capabilities for images and videos using the concept of embeddings.
+**Embedding Requirements**
+    Embedding Types Needed
+**Data Type**   	     **Embedding Model**
+Image	            Vision embedding model (CLIP, ViT)
+Video frame	        Image embedding model
+Video clip	        Aggregated frame embeddings
+Audio (optional)	Audio embeddings
+Text	            Text embedding model
 
+**Embedding Dimensions (Typical)**
+**Model Type**	       **Dimensions**
+Image (CLIP)	            512
+Vision Transformer	     768 / 1024
+Text embeddings	         768 / 1536
 
+Each image/frame → 1 vector
+Each video → many vectors
 
+**Embedding Strategy**
+**Image**
+ 1 image → 1 embedding
 
+**Video**
+ → Frames (every N seconds)
+ → Each frame → embedding
+ → Store with timestamp metadata
 
+**Example metadata:**
+{
+  "video_id": "vid123",
+  "frame_time": "00:01:32",
+  "embedding": [...]
+}
 
+**Vector Database Requirements**
+  **Capabilities Needed**
 
+High-dimensional vector storage
+Cosine similarity / dot product
+Metadata filtering
+Fast ANN (Approximate Nearest Neighbor)
+Horizontal scaling
 
+ **Suitable Databases**
+Pinecone
+Weaviate
+FAISS
+Milvus
+MongoDB Atlas Vector Search
 
+**Query Flow (User Interaction)**
+**Example Query**
+“Show me scenes where a person is holding a phone”
+**Steps:**
+Convert query → text embedding
+Search vector DB against image/video embeddings
+Retrieve top-K matching frames
+Group frames → scenes
+Send context to LLM
+Stream response + thumbnails
 
+2.Identify which models support which embedding dimensions. 
+  A dimension is one numeric feature used to represent meaning.
 
+**An embedding is just a vector:**
+[0.12, -0.98, 1.44, ...]
 
+**If there are:**
+3 numbers → 3 dimensions
+768 numbers → 768 dimensions
+1536 numbers → 1536 dimensions
 
+So:
+Embedding dimension = how much “space” the model has to store meaning
 
+**Real-world analogy** :
+Think of describing a person:
+Height,
+Weight,
+Age,
+Skin tone,
+Accent,
+Emotion,
+Profession.
+
+  Each attribute = one dimension
+
+  More dimensions → richer description
+  Too many → noisy, expensive, inefficient
 
 
 
