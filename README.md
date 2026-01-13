@@ -128,7 +128,8 @@ Connecting to what you already know
 Why embeddings exist
   Computers don’t understand meaning.
   They only understand numbers.
-  Embeddings are the bridge between:
+  
+  Embeddings are the bridge between:  
          human Meaning --- machine numbers
 
 **Tasks**
