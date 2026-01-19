@@ -237,6 +237,236 @@ Profession.
   Too many → noisy, expensive, inefficient
 
 
+**Retrieval-Augmented Generation (RAG)**
+ 
+1_ingestion_pipeline.py (MOST IMPORTANT)
+What problem it solves
+
+LLMs cannot read PDFs or documents directly.
+
+So we must:
+Load documents
+Split them into chunks
+Convert text → embeddings
+Store embeddings in a vector database
+
+Core pipeline
+Documents → Chunks → Embeddings → Vector Store
+
+Key libraries used
+
+langchain.document_loaders ,
+langchain.text_splitter ,
+langchain.embeddings ,
+langchain.vectorstores
+
+Why this file is critical
+
+Every enterprise RAG starts here:
+Company policies,
+Internal manuals,
+Codebases,
+Knowledge bases
+
+ If ingestion is wrong → entire RAG fails
+
+**Chunking, embedding model choice, and metadata design happen here**
+
+**2_retrieval_pipeline.py**
+What it does
+When a user asks a question:
+Convert the query into an embedding ,
+Search the vector database,
+Retrieve top-k most relevant chunks
+
+Key concept:
+Semantic search ≠ keyword search
+
+**Example:**
+  User query: “How do I reset my password?”
+  Matches text: “Steps to recover login credentials”
+
+Why it matters
+Directly controls:
+Accuracy ,
+Hallucination rate ,
+Latency
+
+Poor retrieval = poor answers (even with a strong LLM)
+
+**3_answer_generation.py**
+Where the LLM is used
+
+**Flow**
+User Query
+   ↓
+Retriever
+   ↓
+Relevant Context
+   ↓
+Prompt to LLM
+   ↓
+Final Answer
+
+Prompt pattern:   
+ Use ONLY the following context to answer the question:
+ <context>
+
+Why this is critical
+
+Prevents hallucinations
+Makes responses auditable
+Mandatory in enterprise GenAI systems
+
+**4_history_aware_generation.py**
+What it adds   
+Conversation memory
+
+The system can now understand:   
+“What about step 3?”
+“Explain that again”
+based on previous messages.
+
+Real-world usage:   
+ Chatbots
+ Customer support systems
+ Virtual assistants
+ Helpdesk automation
+
+**CHUNKING STRATEGIES (Files 5 → 7)**
+
+Chunking quality directly affects retrieval quality
+
+**5_recursive_character_text_spliiter.p**y
+What it does
+
+Basic chunking using:
+Paragraphs ,
+Sentences ,
+Fixed character limits
+
+Problems
+ Can break meaning ,
+ Loses semantic structure
+
+**6_semantic_chunking.py**
+Smarter chunking
+
+Splits based on:
+Meaning
+
+Topic boundaries
+Semantic similarity
+
+Why companies prefer this
+Higher retrieval accuracy ,
+Fewer irrelevant chunks ,
+Better context alignment
+
+**7_agentic_chunking.py**
+Next-gen chunking 
+
+Uses an LLM itself to decide:
+Where to split  ,
+What forms a logical unit
+
+Used for
+Legal documents ,
+Medical records ,
+Contracts ,
+Compliance docs
+
+This represents production-grade RAG
+
+**MULTI-MODAL RAG (File 8)** 
+
+**8_multi_modal_rag.ipynb**
+What it teaches
+
+RAG is not limited to text.
+Supports:  
+Text ,
+Images ,
+Diagrams
+
+Flowcharts
+
+Flow
+Image → Vision Embeddings
+Text  → Text Embeddings
+↓
+Store together
+↓
+Retrieve both
+
+Real-world usage: 
+Manufacturing manuals ,
+Medical imaging + reports ,
+Architecture & engineering diagrams
+
+**ADVANCED RETRIEVAL (Files 9 → 13)**
+
+This is where enterprise RAG systems outperform basic ones
+
+**9_retrieval_methods.py**
+Retrieval strategies
+
+Similarity search
+MMR (Max Marginal Relevance – diversity-aware)
+
+**10_multi_query_retrieval.py**
+Problem
+Users ask vague or incomplete questions.
+
+Solution
+LLM generates:
+
+Original Query → Multiple rephrased queries
+
+Benefit
+Improves recall significantly
+
+**11_reciprocal_rank_fusion.py**
+What it does
+Combines results from:
+Multiple retrievers ,
+Multiple strategies
+
+Ranks them intelligently.
+
+Used in  
+Search engines ,
+Enterprise knowledge systems
+
+**12_hybrid_search.ipynb**
+Hybrid = Keyword + Vector Search
+
+Combines:
+BM25 (keyword accuracy)
+Embeddings (semantic understanding)
+
+Best for
+Legal search ,
+Product catalogs ,
+Structured enterprise data
+
+**13_reranker.ipynb**
+Final accuracy booster
+LLM re-ranks retrieved chunks before answering.
+
+Pipeline
+Retrieve top 20 → Re-rank → Use top 5
+
+This is industry standard in 2024+
+
+**Evaluation**
+synthetic_questions.txt
+
+Used to:
+Measure accuracy
+Test retrieval quality
+Compare chunking and retrieval strategies
+
 
 
 
