@@ -1,3 +1,4 @@
+sample RAG_APP codes 
 """
 ========================================================
 1. RAG INGESTION PIPELINE
@@ -387,3 +388,23 @@ def start_chat():
 
 if __name__ == "__main__":
     start_chat()
+
+
+### Requirements.txt
+# Core LangChain
+langchain
+langchain-community
+
+# Hugging Face (embeddings)
+langchain-huggingface
+sentence-transformers
+torch
+
+# Groq (LLM for answer generation)
+langchain-groq
+
+# Database
+pymongo
+
+# Environment variables
+python-dotenv
