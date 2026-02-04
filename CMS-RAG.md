@@ -1,4 +1,4 @@
-### Give Requirement for CMS Rag app
+### Given Requirements for CMS Rag app
 
 <img width="996" height="588" alt="image" src="https://github.com/user-attachments/assets/fb05551b-bb7a-4ecd-9947-c1657c64ead1" />
 
