@@ -21,6 +21,7 @@ RAG (Retrieve + Generate)
 Grounded Answers with Page References
 
 ### System Architecture
+
 ## 1️⃣ Data Sources
 
  PDF product catalogs (scanned + digital)
@@ -373,4 +374,5 @@ These feel intelligent and useful:
 “Best Philips LED panels + Legrand dimmers combination?”
 “Give a full electrical material list using Philips lighting and Legrand wiring devices for a 3BHK home.”
 “Which Legrand dimmers are compatible with LED lighting setups?”
+
 
