@@ -1,10 +1,10 @@
-📘 Catalogue Intelligence System with RAG
+### Catalogue Intelligence System with RAG
 
 An end-to-end Catalogue Management System (CMS) + Retrieval-Augmented Generation (RAG) pipeline that turns raw product catalogs into an intelligent, searchable knowledge system.
 
 This system helps estimators, designers, and engineers quickly find accurate, grounded product information from PDFs, specs, and price lists — without hallucinations.
 
-🚀 What This Project Does
+## What This Project Does
 
 It converts messy catalog data into a structured AI-searchable system:
 
@@ -20,18 +20,18 @@ RAG (Retrieve + Generate)
         ↓
 Grounded Answers with Page References
 
-🧠 System Architecture
-1️⃣ Data Sources
+### System Architecture
+## 1️⃣ Data Sources
 
-📄 PDF product catalogs (scanned + digital)
+ PDF product catalogs (scanned + digital)
 
-🖼 Product images
+ Product images
 
-📊 Specifications (CSV)
+ Specifications (CSV)
 
-💰 Price lists (CSV)
+ Price lists (CSV)
 
-2️⃣ CMS Layer (Catalogue Management System)
+## 2️⃣ CMS Layer (Catalogue Management System)
 
 Responsible for data validation and structuring before AI usage.
 
@@ -45,7 +45,7 @@ Images	Extracted & renamed	Linked by SKU or page
 ✔ Images intelligently matched
 ✔ Human validation logic ensures SKU accuracy
 
-3️⃣ Text Extraction (Improved)
+## 3️ Text Extraction (Improved)
 
 The system uses a Hybrid Extraction Strategy:
 
@@ -55,7 +55,7 @@ Scanned/image PDF	EasyOCR deep learning OCR
 
 This avoids OCR errors when text is already embedded and improves accuracy for scanned catalogs.
 
-4️⃣ Embedding Layer
+## 4️⃣ Embedding Layer
 
 Validated product text is:
 
@@ -69,7 +69,7 @@ Converted into embeddings using MiniLM
 
 Stored in MongoDB Atlas Vector Search
 
-5️⃣ Retrieval (RAG)
+## 5️⃣ Retrieval (RAG)
 
 When a user asks a question:
 
@@ -83,7 +83,7 @@ Context sent to LLM
 
 LLM generates grounded answer with sources
 
-6️⃣ Answer Generation
+## 6️⃣ Answer Generation
 
 The LLM:
 
@@ -97,8 +97,8 @@ Supports fuzzy model number matching
 
 Handles imperfect OCR model numbers
 
-🧰 Tech Stack
-💾 Data Storage
+###  Tech Stack
+## Data Storage
 
 MongoDB Atlas
 
@@ -112,13 +112,14 @@ PDFs
 
 Extracted product images
 
-🛠 Ingestion & Processing
+## Ingestion & Processing
 Tool	Purpose
 PyMuPDF	Native PDF text extraction + images
 pdf2image + Poppler	Convert scanned pages to images
 EasyOCR	Deep learning OCR for scanned catalogs
 Pandas	CSV ingestion
-🧠 Embeddings
+
+##  Embeddings
 
 Model: sentence-transformers/all-MiniLM-L6-v2
 
@@ -126,12 +127,13 @@ Model: sentence-transformers/all-MiniLM-L6-v2
 
 Fast, lightweight, ideal for product search
 
-🤖 RAG & LLM
+## RAG & LLM
 Tool	Purpose
 LangChain	Orchestration & prompting
 MongoDB Vector Search	Semantic retrieval
 Groq (LLaMA 3)	Grounded answer generation
-🔐 Security & Config
+
+## Security & Config
 
 .env for API keys
 
@@ -139,7 +141,7 @@ Environment-based configuration
 
 No hardcoded secrets
 
-📁 Project Structure
+##  Project Structure
 catalog_data/
 │
 ├── pdf_catalogs/              # Raw manufacturer PDFs
@@ -154,24 +156,25 @@ catalog_data/
 ├── answer_generation.py       # LLM grounded answers
 ├── chat_rag_app.py            # Interactive chat UI
 
-⚙️ Setup Instructions
-1️⃣ Create Virtual Environment
+###  Setup Instructions
+## 1️⃣ Create Virtual Environment
 python -m venv venv
 
-2️⃣ Activate
+## 2️⃣ Activate
 venv\Scripts\activate
 
-3️⃣ Upgrade pip
+## 3️⃣ Upgrade pip
 python -m pip install --upgrade pip
 
-4️⃣ Install Dependencies
+## 4️⃣ Install Dependencies
 pip install -r requirements.txt
 
-🖥 System Dependencies
+## System Dependencies
 Tool	Required For
 Poppler	PDF → image conversion
 Tesseract (optional)	Legacy OCR fallback (not primary)
-🌍 Serve PDFs for Page Jumping
+
+## Serve PDFs for Page Jumping
 
 To allow links like “Open Catalog” to open the exact page:
 
@@ -183,14 +186,14 @@ The app links to:
 
 http://localhost:9000/catalog.pdf#page=12
 
-🔑 Environment Variables
+## Environment Variables
 
 Create .env file:
 
 MONGODB_URI=your_mongodb_connection_string
 GROQ_API_KEY=your_groq_api_key
 
-▶️ Running the Pipelines
+## ▶️ Running the Pipelines
 Step 1 — Extract Data from PDFs
 python extract.py
 
@@ -203,7 +206,7 @@ python embedding_pipeline.py
 Step 4 — Ask Questions
 python chat_rag_app.py
 
-🎯 Key Features
+### Key Features
 
 ✔ Hybrid OCR for scanned + digital catalogs
 ✔ Accurate page tracking per chunk
@@ -212,7 +215,7 @@ python chat_rag_app.py
 ✔ Fuzzy model number understanding
 ✔ Grounded answers with citations
 
-🏆 Outcome
+## Outcome
 
 You now have a production-style Catalog Intelligence System that:
 
@@ -224,8 +227,8 @@ Provides accurate, traceable AI answers
 
 Avoids hallucinations
 
-Questions: 
-phillips-cat.pdf
+### Questions: 
+## phillips-cat.pdf
 **LED Bulbs & Lamps**
 What is the lumen output of Philips Ace Saver 7W LED lamp?
 What is the life hours of Stellar Bright High Wattage LED bulbs?
@@ -261,7 +264,7 @@ What current ratings are available in Philips MCBs?
 What protection range is available in Philips RCCB?
 What is the MRP of the 3-pin Philips Plug Top 16A?
 
-legrandcat.pdf:
+## legrandcat.pdf:
 **Switches (Classic White)**
 What is the MRP of the Legrand 6A 1 way switch 1M White (Cat.No 6792 00)?
 What is the price of the 16A Switch 1 way 1M White?
@@ -303,7 +306,7 @@ What is the MRP of the 6A Switch 1 way 1M Charcoal Grey?
 What is the price of the 16A 3 Pin Switched Socket 3M Charcoal Grey?
 How much does the 6A Bell Push 1M with indicator Charcoal Grey cost?
 
-**legrand questions :::**
+## legrand questions
 
  **General Product Discovery (Legrand)**
 These are perfect for homeowners, electricians, and architects.
@@ -370,3 +373,4 @@ These feel intelligent and useful:
 “Best Philips LED panels + Legrand dimmers combination?”
 “Give a full electrical material list using Philips lighting and Legrand wiring devices for a 3BHK home.”
 “Which Legrand dimmers are compatible with LED lighting setups?”
+
